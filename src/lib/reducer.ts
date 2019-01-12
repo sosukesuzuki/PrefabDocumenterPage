@@ -14,7 +14,7 @@ const initialState: State = {
 export function reducer(state: State = initialState, action: Action) {
   const { type, payload } = action;
   switch (type) {
-    case ActionTypes.ADD_ROWS_TO_STORE:
+    case ActionTypes.ADD_DB_TO_STORE:
       return {
         ...state,
         rowList: [...state.rowList, ...payload.rows]

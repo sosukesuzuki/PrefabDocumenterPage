@@ -2,7 +2,7 @@ import { Row } from "./types";
 
 export enum ActionTypes {
   UPLOAD_DB_FILE = "UPLOAD_DB_FILE",
-  ADD_ROWS_TO_STORE = "ADD_ROWS_TO_STORE",
+  ADD_DB_TO_STORE = "ADD_DB_TO_STORE",
   SET_IS_LOADING_DB = "SET_IS_LOADING_DB"
 }
 
@@ -22,7 +22,7 @@ export default {
   },
   addDBToStore(rows: Row[]) {
     return {
-      type: ActionTypes.ADD_ROWS_TO_STORE,
+      type: ActionTypes.ADD_DB_TO_STORE,
       payload: {
         rows
       }
