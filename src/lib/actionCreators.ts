@@ -2,8 +2,7 @@ import { Row } from "./types";
 
 export enum ActionTypes {
   UPLOAD_DB_FILE = "UPLOAD_DB_FILE",
-  ADD_DB_TO_STORE = "ADD_DB_TO_STORE",
-  SET_IS_LOADING_DB = "SET_IS_LOADING_DB"
+  ADD_DB_TO_STORE = "ADD_DB_TO_STORE"
 }
 
 export interface Action {
@@ -25,14 +24,6 @@ export default {
       type: ActionTypes.ADD_DB_TO_STORE,
       payload: {
         rows
-      }
-    };
-  },
-  setIsLoading(isLoadingDB: boolean) {
-    return {
-      type: ActionTypes.SET_IS_LOADING_DB,
-      payload: {
-        isLoadingDB
       }
     };
   }

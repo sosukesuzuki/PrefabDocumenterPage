@@ -23,7 +23,6 @@ function* uploadDBFileSaga(): SagaIterator {
   while (true) {
     const { payload } = yield take(ActionTypes.UPLOAD_DB_FILE);
     const { file } = payload;
-    yield put(actionCreators.setIsLoading(true));
     const db: any = yield call(getDBFromFile, file);
     const stmt = db.prepare("select * from Document");
     stmt.getAsObject({
@@ -45,7 +44,6 @@ function* uploadDBFileSaga(): SagaIterator {
       const row = stmt.getAsObject();
       rows.push(row);
     }
-    yield put(actionCreators.setIsLoading(false));
     yield put(actionCreators.addDBToStore(rows));
     stmt.free();
   }
