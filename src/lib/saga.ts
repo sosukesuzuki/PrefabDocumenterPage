@@ -1,5 +1,5 @@
 import { take, put, fork, call } from "redux-saga/effects";
-import { ActionTypes } from "./actionCreators";
+import actionCreators, { ActionTypes } from "./actionCreators";
 import { SagaIterator } from "redux-saga";
 import { Row } from "./types";
 
@@ -23,12 +23,7 @@ function* uploadDBFileSaga(): SagaIterator {
   while (true) {
     const { payload } = yield take(ActionTypes.UPLOAD_DB_FILE);
     const { file } = payload;
-    yield put({
-      type: ActionTypes.SET_IS_LOADING_DB,
-      payload: {
-        isLoadingDB: true
-      }
-    });
+    yield put(actionCreators.setIsLoading(true));
     const db: any = yield call(getDBFromFile, file);
     const stmt = db.prepare("select * from Document");
     stmt.getAsObject({
@@ -50,18 +45,8 @@ function* uploadDBFileSaga(): SagaIterator {
       const row = stmt.getAsObject();
       rows.push(row);
     }
-    yield put({
-      type: ActionTypes.SET_IS_LOADING_DB,
-      payload: {
-        isLoadingDB: false
-      }
-    });
-    yield put({
-      type: ActionTypes.ADD_ROWS_TO_STORE,
-      payload: {
-        rows
-      }
-    });
+    yield put(actionCreators.setIsLoading(false));
+    yield put(actionCreators.addDBToStore(rows));
     stmt.free();
   }
 }
